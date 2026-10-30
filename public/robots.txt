@@ -1,0 +1,7 @@
+User-agent: *
+
+# Autoriser tout le site
+Allow: /
+
+ Sitemap
+Sitemap: https://laviegg.fr/sitemap.xml

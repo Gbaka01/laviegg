@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GOLI Gore Gbaka | Développeur Web & Artiste</title>
+    <meta name="description" content="Après un bac+2 en électronique et microinformatique, GOLI Gore Gbaka se spécialise en développement web et web mobile à Innov-School." />
+    <meta name="author" content="GOLI Gore Gbaka" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.laviegg.fr/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="La vie GG" />
+    <meta property="og:title" content="GOLI Gore Gbaka | Développeur Web & Artiste" />
+    <meta property="og:description" content="Après un bac+2 en électronique et microinformatique, je me spécialise en développement web et web mobile à Innov-School." />
+    <meta property="og:url" content="https://www.laviegg.fr/" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content="https://www.laviegg.fr/gg_1.jpg" />
+    <meta property="og:image:alt" content="Portrait de GOLI Gore Gbaka" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GOLI Gore Gbaka | Développeur Web & Artiste" />
+    <meta name="twitter:description" content="Après un bac+2 en électronique et microinformatique, je me spécialise en développement web et web mobile à Innov-School." />
+    <meta name="twitter:image" content="https://www.laviegg.fr/gg_1.jpg" />
+    <meta name="twitter:image:alt" content="Portrait de GOLI Gore Gbaka" />
+
+    <!-- Données structurées : même domaine que le canonical (laviegg.fr) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.laviegg.fr/#website",
+          "url": "https://www.laviegg.fr/",
+          "name": "La vie GG",
+          "description": "Site personnel de Goli Gore Gbaka, développeur web et artiste.",
+          "inLanguage": "fr-FR",
+          "publisher": { "@id": "https://www.laviegg.fr/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.laviegg.fr/#person",
+          "name": "Goli Gore Gbaka",
+          "url": "https://www.laviegg.fr/",
+          "image": "https://www.laviegg.fr/gg_1.jpg",
+          "jobTitle": ["Développeur web", "Artiste"],
+          "sameAs": [
+            "https://www.reseaugbaka.fr/",
+            "https://www.gbaka.fr/",
+            "https://www.femmegore.fr/",
+            "https://www.dessinsgore.fr/",
+            "https://www.bravocuistot-gg.fr/",
+            "https://www.bravocuistot-goli.fr/",
+            "https://www.golicecile.org/",
+            "https://www.galerie-art-gore.fr/"
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.laviegg.fr/#webpage",
+          "url": "https://www.laviegg.fr/",
+          "name": "GOLI Gore Gbaka | Développeur Web & Artiste",
+          "description": "Présentation de Goli Gore Gbaka, de ses activités de développeur web et de ses créations artistiques.",
+          "isPartOf": { "@id": "https://www.laviegg.fr/#website" },
+          "about": { "@id": "https://www.laviegg.fr/#person" },
+          "inLanguage": "fr-FR"
+        }
+      ]
+    }
+    </script>
+
+    <!-- 1) Consentement refusé par défaut (AVANT GTM) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+      // Réapplique un choix déjà enregistré (évite d'attendre React)
+      try {
+        var c = JSON.parse(localStorage.getItem('consentement-cookies'));
+        if (c && c.analytics) {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      } catch (e) {}
+    </script>
+
+    <!-- 2) Google Tag Manager (snippet officiel) -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WLX6L6R2');
+    </script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLX6L6R2"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
