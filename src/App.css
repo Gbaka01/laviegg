@@ -1,28 +1,44 @@
-/* Charge toutes les graisses utilisées (400 à 700), sinon le navigateur simule le gras */
+/* Doit rester la toute première ligne du fichier */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 
-/* Le pied de page reste toujours en bas */
-html, body, #root {
-  height: 100%;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
 }
 
 body {
-  margin: 0;
   /* Image locale (dans public/), couvrante, sans mosaïque */
   background: #f4f6f8 url("/l-origine-du-monde.jpg") center / cover no-repeat fixed;
-  /* Police lisible pour le texte courant */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color: #212529;
 }
 
+/* Le pied de page reste toujours en bas */
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  max-width: none;   /* annule le style par défaut de Vite */
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 #root > main {
   flex: 1;
+  width: 100%;
+}
+
+/* Header et footer toujours pleine largeur */
+.navbar,
+footer {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
 }
 
 /* Dancing Script seulement pour le logo et les titres */
@@ -35,8 +51,8 @@ h1 { font-weight: 700; }
 h2 { font-weight: 600; }
 h3 { font-weight: 500; }
 
-/* Fond blanc semi-transparent sur toutes les pages, sauf l'accueil qui a son propre style */
-#root > main > *:not(.accueil) {
+/* Fond blanc semi-transparent : uniquement les éléments avec la classe .page */
+.page {
   background: rgba(255, 255, 255, 0.75);
   border-radius: 12px;
   padding: 2rem;
@@ -44,9 +60,17 @@ h3 { font-weight: 500; }
   margin: 2rem auto;
 }
 
-/* Mobile : "fixed" pose problème sur iOS */
-@media (max-width: 768px) {
+/* Mobile et tablettes tactiles : "fixed" pose problème sur iOS */
+@media (max-width: 768px), (hover: none) {
   body {
     background-attachment: scroll;
+  }
+}
+
+/* Mobile : marges sur les côtés et moins de padding */
+@media (max-width: 768px) {
+  .page {
+    margin: 1rem;
+    padding: 1.25rem;
   }
 }

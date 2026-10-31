@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 
 function Footer() {
   const ouvrirCookies = () => window.dispatchEvent(new Event("ouvrir-cookies"));

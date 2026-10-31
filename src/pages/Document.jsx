@@ -62,7 +62,8 @@ function Document() {
   };
 
   return (
-    <div className="container py-5" style={{ maxWidth: 750 }}>
+<section className="page">
+<div className="container py-5" style={{ maxWidth: 750 }}>
       <h1 className="h3 mb-2">Questions sur le document</h1>
 
       <p className="text-muted mb-4">
@@ -119,6 +120,7 @@ function Document() {
         </button>
       </form>
     </div>
+    </section>
   );
 }
 
