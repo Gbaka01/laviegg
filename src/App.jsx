@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import BandeauCookies from "./components/BandeauCookies";
 import Document from "./pages/Document";
 import NotFound from "./pages/NotFound";
+import Mentions from "./pages/Mentions";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <main>
         <Routes>
+        <Route path="/mentions-legales" element={<Mentions />} />
           <Route path="/" element={<Navigate to="/document" replace />} />
           <Route path="/document" element={<Document />} />
           <Route path="*" element={<NotFound />} />

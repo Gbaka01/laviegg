@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 function Footer() {
   const ouvrirCookies = () => window.dispatchEvent(new Event("ouvrir-cookies"));
@@ -9,7 +9,9 @@ function Footer() {
         GOLI Gore Gbaka © {new Date().getFullYear()} - Tous droits réservés
       </p>
       <p className="mb-0 small">
-      
+        <Link className="link-light" to="/mentions-legales">
+          Mentions légales
+        </Link>
         {" · "}
         <button
           type="button"

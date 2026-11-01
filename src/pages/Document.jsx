@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-const API_URL = "/api/document";
+// En prod : VITE_API_URL=https://api.laviegg.fr (dans .env.production)
+// En dev : vide → passe par le proxy Vite /api
+const API = import.meta.env.VITE_API_URL || "";
+const API_URL = `${API}/api/document`;
 
 function Document() {
   const [info, setInfo] = useState(null); // { nom, caracteres }
