@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./BandeauCookies.css";
+import { Link } from "react-router-dom";
+// ...
 
 const CLE = "consentement-cookies";
 const DUREE_MS = 1000 * 60 * 60 * 24 * 182; // ~6 mois, puis on redemande
@@ -44,7 +46,7 @@ export default function BandeauCookies() {
       <p>
         Ce site utilise des cookies de mesure d'audience (Google Analytics) pour
         comprendre comment il est consulté. Ils ne sont déposés qu'avec votre accord.{" "}
-        <a href="/mentions-legales">En savoir plus</a>
+        <Link to="/mentions-legales">En savoir plus</Link>
       </p>
       <div className="bandeau-cookies__boutons">
         <button type="button" onClick={() => choisir(false)}>Tout refuser</button>
