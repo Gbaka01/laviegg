@@ -21,9 +21,11 @@ function Header() {
         <div className="collapse navbar-collapse" id="menu">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
+              <NavLink className="nav-link" to="/" end>Accueil</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/document">Document</NavLink>
             </li>
-      
           </ul>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 // En prod : VITE_API_URL=https://api.laviegg.fr (dans .env.production)
@@ -13,6 +14,9 @@ function Document() {
   const [loading, setLoading] = useState(false);
   const [erreur, setErreur] = useState("");
   const finRef = useRef(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const questionAutoEnvoyee = useRef(false);
 
   // Vérifie au chargement que le document est bien lisible
   useEffect(() => {
@@ -41,13 +45,14 @@ function Document() {
     finRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [historique, loading]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const q = question.trim();
+  // Envoie une question à l'API (utilisé par le formulaire et par ?q=)
+  const poserQuestion = async (texte) => {
+    const q = texte.trim();
     if (!q || loading) return;
 
     setLoading(true);
     setErreur("");
+    setQuestion(q);
 
     try {
       const res = await axios.post(API_URL, {
@@ -64,65 +69,82 @@ function Document() {
     }
   };
 
+  // Question venant de la page d'accueil : /document?q=...
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (!q || !info || questionAutoEnvoyee.current) return;
+
+    questionAutoEnvoyee.current = true; // évite un double envoi (StrictMode)
+    setSearchParams({}, { replace: true }); // retire ?q= de l'URL
+    poserQuestion(q);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [info, searchParams]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    poserQuestion(question);
+  };
+
   return (
-<section className="page">
-<div className="container py-5" style={{ maxWidth: 750 }}>
-      <h1 className="h3 mb-2">Questions sur le document</h1>
+    <section className="page">
+      <div className="container py-5" style={{ maxWidth: 750 }}>
+        <h1 className="h3 mb-2">Questions sur le document</h1>
 
-      <p className="text-muted mb-4">
-        {info
-          ? `Document chargé : ${info.nom} (${Number(info.caracteres || 0).toLocaleString("fr-FR")} caractères)`
-          : erreur
-            ? "Document non disponible."
-            : "Vérification du document..."}
-      </p>
+        <p className="text-muted mb-4">
+          {info
+            ? `Document chargé : ${info.nom} (${Number(info.caracteres || 0).toLocaleString("fr-FR")} caractères)`
+            : erreur
+              ? "Document non disponible."
+              : "Vérification du document..."}
+        </p>
 
-      {historique.length === 0 && info && (
-        <div className="alert alert-light border">
-          Posez n'importe quelle question : Claude répond uniquement à partir du document.
-        </div>
-      )}
-
-      {historique.map((item, i) => (
-        <div key={i} className="mb-4">
-          <div className="p-3 bg-primary text-white rounded mb-2 ms-5">{item.question}</div>
-          <div className="p-3 bg-light border rounded me-5" style={{ whiteSpace: "pre-wrap" }}>
-            {item.reponse}
+        {historique.length === 0 && info && !loading && (
+          <div className="alert alert-light border">
+            Posez n'importe quelle question : Claude répond uniquement à partir du document.
           </div>
-        </div>
-      ))}
+        )}
 
-      {loading && (
-        <div className="text-muted mb-3">
-          <span className="spinner-border spinner-border-sm me-2" />
-          Claude lit le document...
-        </div>
-      )}
+        {historique.map((item, i) => (
+          <div key={i} className="mb-4">
+            <div className="p-3 bg-primary text-white rounded mb-2 ms-5">{item.question}</div>
+            <div className="p-3 bg-light border rounded me-5" style={{ whiteSpace: "pre-wrap" }}>
+              {item.reponse}
+            </div>
+          </div>
+        ))}
 
-      {erreur && <div className="alert alert-danger">Erreur : {erreur}</div>}
+        {loading && (
+          <div className="text-muted mb-3">
+            <span className="spinner-border spinner-border-sm me-2" />
+            Claude lit le document...
+          </div>
+        )}
 
-      <div ref={finRef} />
+        {erreur && <div className="alert alert-danger">Erreur : {erreur}</div>}
 
-      <form onSubmit={handleSubmit} className="d-flex gap-2">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Posez une question sur le document..."
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          disabled={loading || !info}
-          maxLength={2000}
-          autoFocus
-        />
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={loading || !info || !question.trim()}
-        >
-          Envoyer
-        </button>
-      </form>
-    </div>
+        <div ref={finRef} />
+
+        <form onSubmit={handleSubmit} className="d-flex gap-2">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Posez une question sur le document..."
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            disabled={loading || !info}
+            maxLength={2000}
+            autoFocus
+          />
+<button
+  type="submit"
+  className="btn btn-primary"
+  disabled={loading || !info || !question.trim()}
+  style={{ background: "#0d6efd", color: "#fff", border: "none" }}
+>
+  Envoyer
+</button>
+        </form>
+      </div>
     </section>
   );
 }

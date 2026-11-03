@@ -3,5 +3,5 @@ User-agent: *
 # Autoriser tout le site
 Allow: /
 
- Sitemap
-Sitemap: https://laviegg.fr/sitemap.xml
+# Sitemap
+Sitemap: https://www.laviegg.fr/sitemap.xml
